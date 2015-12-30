@@ -9,7 +9,7 @@ Usage:
 - Run this in that folder:
        find . -type f -exec mv '{}' '{}'.tar.gz \;
 - Clone the script (or download to that folder)
-- Run the script. 
+- Run the script
 
  All files will be moved to save, and .tar.gz will be moved to 'processed' folder
  You can delete the 'processed' folder if you're happy with the results.

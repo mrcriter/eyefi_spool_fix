@@ -17,19 +17,19 @@ for i in *.tar.gz; do
 	var1=`file $i | awk  '{print $2}'`
 	case "$var1" in
 		"JPEG")	echo "Found a JPEG!"
+			# outputs JPEG in IMG_YYYYMMDD_HHMMSS.jpg format based on exif data
 			year=`file $i | awk -F'datetime=' '{print $2}' | awk -F':' '{print $1}'`
 			month=`file $i | awk -F'datetime=' '{print $2}' | awk -F':' '{print $2}'`
 			dayhour=`file $i | awk -F'datetime=' '{print $2}' | awk -F':' '{print $3}' | sed 's/ /_/'`
 			minute=`file $i | awk -F'datetime=' '{print $2}' | awk -F':' '{print $4}'`
 			second=`file $i | awk -F'datetime=' '{print $2}' | awk -F':' '{print $5}' | awk -F',' '{print $1}'`
 			mv $i ./saved/IMG_$year$month$dayhour$minute$second.jpg
-			#mv $i ./processed/$i
                         echo "$i saved to IMG_$year$month$dayhour$minute$second.jpg" >> find_jpeg.log
 			;;
 		"ISO")	echo "Found a MP4!"
+			#Uses file date / time to save file as MOV_YYYYMMDD_HHMMSS.mp4
 			name=`date -r $i +'%Y%M%d_%H%M%S'`
 			mv $i ./saved/MOV_$name.mp4
-			#mv $i ./processed/$i
 			echo "$i saved to MOV_$name.mp4" >> find_jpeg.log
 		;;
 		"POSIX") echo "Found posix!"
